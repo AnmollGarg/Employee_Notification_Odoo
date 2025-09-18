@@ -3,24 +3,40 @@
         <record id="mail_template_employee_birthday" model="mail.template">
             <field name="name">Employee Birthday Notification</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="subject">Happy Birthday, ${object.name}!</field>
+            <field name="subject">Happy Birthday!</field>
             <field name="email_to">${object.work_email}</field>
             <field name="body_html">
                 <![CDATA[
-                    <p>Dear ${object.name},</p>
-                    <p>Happy Birthday! Wishing you a wonderful year ahead.</p>
+                    <div>
+                        Dear <t t-out="object.name or 'Employee'"/>,<br/><br/>
+                        Happy Birthday! Wishing you a wonderful year ahead.<br/>
+                        If you have any questions or need assistance, feel free to reach out.<br/><br/>
+                        Best wishes,<br/>
+                        <t t-if="user.signature">
+                            <br />
+                            <t t-out="user.signature or ''"/>
+                        </t>
+                    </div>
                 ]]>
             </field>
         </record>
         <record id="mail_template_employee_anniversary" model="mail.template">
             <field name="name">Employee Anniversary Notification</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
-            <field name="subject">Happy Work Anniversary, ${object.user_id.login}!</field>
+            <field name="subject">Happy Work Anniversary!</field>
             <field name="email_to">${object.work_email}</field>
             <field name="body_html">
                 <![CDATA[
-                    <p>Dear ${object.user_id.login},</p>
-                    <p>Congratulations on your work anniversary!</p>
+                    <div>
+                        Dear <t t-out="object.name or 'Employee'"/>,<br/><br/>
+                        Congratulations on your work anniversary!<br/>
+                        Thank you for your dedication and hard work.<br/><br/>
+                        Best regards,<br/>
+                        <t t-if="user.signature">
+                            <br />
+                            <t t-out="user.signature or ''"/>
+                        </t>
+                    </div>
                 ]]>
             </field>
         </record>
