@@ -1,8 +1,10 @@
-from odoo import models, api
+from odoo import models, api, fields
 from datetime import datetime
 
 class EmployeeNotification(models.Model):
     _inherit = 'hr.employee'
+
+    employee_date_of_joining = fields.Date(string='Date of Joining')
 
     @api.model
     def send_anniversary_birthday_notifications(self):
